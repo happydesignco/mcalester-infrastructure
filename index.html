@@ -212,7 +212,16 @@ section p {
 .dime-bar .segment.general { background: var(--water-blue); flex: 2; }
 .dime-bar .segment.bonds { background: var(--clay-red); flex: 1; }
 .dime-bar .segment.infra { background: var(--caution); color: var(--asphalt); flex: 0.5; }
-.dime-bar .segment.other { background: var(--success); flex: 0.5; }
+.dime-bar .segment.dwsrf { background: var(--water-dark); flex: 0.25; }
+.dime-bar .segment.other { background: var(--success); flex: 0.25; }
+
+.dwsrf-note {
+  font-size: 0.75rem;
+  opacity: 0.5;
+  font-style: italic;
+  margin: 0.5rem 0 1.5rem;
+  line-height: 1.5;
+}
 
 .dime-legend {
   display: grid;
@@ -730,7 +739,8 @@ section p {
       <div class="segment general">2¢</div>
       <div class="segment bonds">1¢</div>
       <div class="segment infra">½¢</div>
-      <div class="segment other">½¢</div>
+      <div class="segment dwsrf">¼¢</div>
+      <div class="segment other">¼¢</div>
     </div>
 
     <div class="dime-legend">
@@ -756,18 +766,25 @@ section p {
       </div>
       <div class="dime-legend-item">
         <div class="dot" style="background: var(--caution)"></div>
-        Infrastructure &amp; Water Projects
+        Street &amp; Infrastructure Maintenance
         <span class="cents">½¢</span>
+      </div>
+      <div class="dime-legend-item">
+        <div class="dot" style="background: var(--water-dark)"></div>
+        DWSRF Water Line Project
+        <span class="cents">¼¢</span>
       </div>
       <div class="dime-legend-item">
         <div class="dot" style="background: var(--success)"></div>
         Schools &amp; Cancer Center
-        <span class="cents">½¢</span>
+        <span class="cents">¼¢</span>
       </div>
     </div>
 
+    <p class="dwsrf-note">DWSRF = Drinking Water State Revolving Fund — a dedicated state-partnered fund for water system improvements, separate from general street maintenance.</p>
+
     <div class="callout">
-      <strong>6 cents leave town before McAlester sees a penny.</strong> Of the 4 cents the city keeps, a full 25% goes to paying off decades-old bond debt. That leaves roughly <strong>half a cent on every dollar</strong> for the actual work of maintaining streets and underground infrastructure.
+      <strong>6 cents leave town before McAlester sees a penny.</strong> Of the 4 cents the city keeps, a full quarter goes to paying off decades-old bond debt. The water line project and schools each have their own dedicated slices. That leaves <strong>half a cent on every dollar</strong> for the actual work of maintaining streets and infrastructure — the work this election is about.
     </div>
   </div>
 </div>
