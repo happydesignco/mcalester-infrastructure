@@ -235,59 +235,66 @@ section p {
 .debt-visual {
   display: flex;
   align-items: flex-end;
-  gap: 2px;
-  height: 200px;
+  gap: 6px;
+  height: 220px;
   margin: 2rem 0 0.75rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid var(--worn-road);
+  padding-bottom: 1.8rem;
+  border-bottom: 2px solid #ddd;
   position: relative;
-}
-
-.debt-visual::after {
-  content: 'Years';
-  position: absolute;
-  bottom: -1.5rem;
-  right: 0;
-  font-size: 0.7rem;
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
 }
 
 .debt-bar {
   flex: 1;
   background: var(--clay-red);
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
   position: relative;
   transition: height 0.6s ease;
   min-width: 0;
 }
 
-.debt-bar.future {
+.debt-bar.balloon {
   background: var(--clay-red);
-  opacity: 0.35;
+  opacity: 0.45;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 4px,
+    rgba(255,255,255,0.15) 4px,
+    rgba(255,255,255,0.15) 8px
+  );
 }
 
-.debt-bar.freed {
-  background: var(--success);
-  opacity: 0.6;
+.debt-bar.zero {
+  background: #ddd;
+  opacity: 0.4;
+}
+
+.debt-bar-amount {
+  position: absolute;
+  top: -1.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
 }
 
 .debt-bar-label {
   position: absolute;
-  bottom: -1.4rem;
+  bottom: -1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.55rem;
+  font-size: 0.7rem;
   color: var(--text-light);
   white-space: nowrap;
 }
 
 .debt-annotation {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 2rem;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--text-light);
 }
 
@@ -702,17 +709,16 @@ section p {
   <h2>We're still paying for yesterday.</h2>
   <p class="subtitle">A significant portion of McAlester's city sales tax goes to bond debt service — obligations taken on years ago that today's taxpayers are still paying down.</p>
 
-  <p>That 1¢ of your dime going to bond repayment? It adds up to roughly <strong>$4 million a year</strong> that can't be spent on a single pothole, a single water line, or a single foot of new pavement. It goes to debt service.</p>
+  <p>That 1¢ of your dime going to bond repayment? It adds up to nearly <strong>$5 million this year alone</strong> — spread across notes and bonds dating back over a decade. That's money that can't touch a single pothole, water line, or foot of new pavement.</p>
 
-  <p>The good news: much of this debt rolls off over the next several years. As bonds mature and are retired, that revenue becomes available for other priorities — potentially <strong>multiplying</strong> the city's capacity to invest in infrastructure.</p>
+  <p>The good news: most of this regular debt retires by 2029. Annual payments drop from <strong>$4.8 million to under $500,000</strong> — a dramatic cliff. The bad news: large balloon payments on deferred debt come due in the early 2030s, which the city will need to plan for.</p>
 
   <div class="debt-visual" id="debtChart"></div>
   <div class="debt-annotation">
-    <span>← Higher debt burden</span>
-    <span>Bonds rolling off →</span>
+    <span>Annual debt payments (millions)</span>
   </div>
 
-  <p style="margin-top: 2rem;">But we can't wait seven years to start fixing streets and the infrastructure underneath them. The deferred maintenance is compounding <em>now</em>. Every year we wait, the bill gets bigger.</p>
+  <p style="margin-top: 2rem;">The window between the regular debt retiring and the balloon payments coming due is exactly when the proposed 1% sales tax would be generating revenue. The timing matters — and it makes starting <em>now</em> even more important.</p>
 </section>
 
 <!-- SECTION 3: THE SCALE -->
@@ -848,32 +854,39 @@ section p {
     </div>
 
     <div class="source-note">
-      Data sources: City of McAlester Mid-Year Budget FY2025-26 presentation; Ordinance No. 2863 (2026 Infrastructure Improvement Sales Tax); Division 8 Citizens Street Improvement Commission ordinance; McAlester City Council Special Meeting minutes, January 13 & 28, 2026; McAlester News-Capital reporting; FHWA highway cost data; ASCE/Utah State University water main study (2023). This page was created by a McAlester resident as a civic resource — not by the City of McAlester.
+      Data sources: City of McAlester Mid-Year Budget FY2025-26 presentation; McAlester Public Works Authority debt payment cash flow report; Ordinance No. 2863 (2026 Infrastructure Improvement Sales Tax); Division 8 Citizens Street Improvement Commission ordinance; McAlester City Council Special Meeting minutes, January 13 & 28, 2026; McAlester News-Capital reporting; FHWA highway cost data; ASCE/Utah State University water main study (2023). This page was created by a McAlester resident as a civic resource — not by the City of McAlester.
     </div>
   </div>
 </div>
 
 <script>
-// Debt visualization - conceptual representation of bond debt rolling off
+// Debt visualization - actual bond payment schedule from MPWA cash flow report
 const debtChart = document.getElementById('debtChart');
-const years = [
-  { label: "'26", height: 95 },
-  { label: "'27", height: 90 },
-  { label: "'28", height: 85 },
-  { label: "'29", height: 78 },
-  { label: "'30", height: 68 },
-  { label: "'31", height: 55 },
-  { label: "'32", height: 40 },
-  { label: "'33", height: 25, freed: true },
-  { label: "'34", height: 15, freed: true },
-  { label: "'35", height: 8, freed: true },
-  { label: "'36", height: 5, freed: true },
+// Real annual debt payments in millions, max is ~$5.77M
+const debtData = [
+  { label: "'26", amount: 4.83, balloon: false },
+  { label: "'27", amount: 4.88, balloon: false },
+  { label: "'28", amount: 4.19, balloon: false },
+  { label: "'29", amount: 0.40, balloon: false },
+  { label: "'30", amount: 0, balloon: false },
+  { label: "'31", amount: 3.93, balloon: true },
+  { label: "'32", amount: 3.93, balloon: true },
+  { label: "'33", amount: 3.93, balloon: true },
+  { label: "'34", amount: 5.77, balloon: true },
 ];
+const maxDebt = 5.77;
 
-years.forEach((y) => {
+debtData.forEach((y) => {
   const bar = document.createElement('div');
-  bar.className = 'debt-bar' + (y.freed ? ' freed' : '');
-  bar.style.height = y.height + '%';
+  bar.className = 'debt-bar' + (y.balloon ? ' balloon' : '') + (y.amount === 0 ? ' zero' : '');
+  bar.style.height = (y.amount / maxDebt * 100) + '%';
+  if (y.amount === 0) bar.style.height = '2%';
+
+  const amtLabel = document.createElement('div');
+  amtLabel.className = 'debt-bar-amount';
+  amtLabel.textContent = y.amount === 0 ? '$0' : '$' + y.amount.toFixed(1) + 'M';
+  bar.appendChild(amtLabel);
+
   const label = document.createElement('div');
   label.className = 'debt-bar-label';
   label.textContent = y.label;
