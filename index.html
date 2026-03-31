@@ -722,15 +722,15 @@ section p {
 
   <div class="scale-grid">
     <div class="scale-card">
-      <div class="big-num red">154</div>
-      <div class="label">street miles<br>to maintain</div>
+      <div class="big-num red">166</div>
+      <div class="label">lane miles<br>to maintain</div>
     </div>
     <div class="scale-card">
-      <div class="big-num blue">$3M</div>
-      <div class="label">cost to reconstruct<br>one street mile</div>
+      <div class="big-num blue">$1.5M</div>
+      <div class="label">cost to reconstruct<br>one lane mile</div>
     </div>
     <div class="scale-card">
-      <div class="big-num gold">$462M</div>
+      <div class="big-num gold">$249M</div>
       <div class="label">total reconstruction<br>cost (streets only)</div>
     </div>
     <div class="scale-card">
@@ -739,7 +739,7 @@ section p {
     </div>
   </div>
 
-  <p>At $1.5 million a year and $3 million per mile, we can reconstruct about <strong>half a mile of street per year</strong>. At that pace, it would take over <strong>300 years</strong> to address all 154 street miles.</p>
+  <p>At $1.5 million a year and $1.5 million per lane mile, we can reconstruct about <strong>one lane mile of street per year</strong>. At that pace, it would take over <strong>160 years</strong> to address all 166 lane miles.</p>
 
   <p>The proposed 1% tax has a <strong>10-year sunset</strong>. It's not forever. So the real question is simple: how much do we get done in those 10 years?</p>
 
@@ -751,7 +751,7 @@ section p {
     </div>
   </div>
 
-  <p style="margin-top: 2rem;">An additional 1% sales tax would generate an estimated <strong>$3–5 million per year</strong> — roughly tripling the city's infrastructure capacity. Over 10 years, that's the difference between fixing <strong>5 miles</strong> and fixing <strong>15 miles</strong>. It won't fix everything. But it's the difference between treading water and making real, visible progress.</p>
+  <p style="margin-top: 2rem;">An additional 1% sales tax would generate an estimated <strong>$3–5 million per year</strong> — roughly tripling the city's infrastructure capacity. Over 10 years, that's the difference between fixing <strong>10 lane miles</strong> and fixing <strong>30 lane miles</strong>. It won't fix everything. But it's the difference between treading water and making real, visible progress.</p>
 </section>
 
 <!-- SECTION 4: DIG ONCE -->
@@ -890,9 +890,9 @@ years.forEach((y) => {
   const ch = H - pad.top - pad.bottom;
 
   const years = 10;
-  const currentRate = 0.5;   // miles/year at $1.5M
-  const proposedRate = 1.5;  // miles/year at ~$4.5M
-  const maxMiles = proposedRate * years; // 15
+  const currentRate = 1;     // lane miles/year at $1.5M
+  const proposedRate = 3;    // lane miles/year at ~$4.5M
+  const maxMiles = proposedRate * years; // 30
 
   function x(yr) { return pad.left + (yr / years) * cw; }
   function y(mi) { return pad.top + ch - (mi / maxMiles) * ch; }
@@ -906,7 +906,7 @@ years.forEach((y) => {
   </defs>`;
 
   // Y-axis gridlines
-  [0, 5, 10, 15].forEach(mi => {
+  [0, 10, 20, 30].forEach(mi => {
     const yy = y(mi);
     markup += `<line x1="${pad.left}" y1="${yy}" x2="${W - pad.right}" y2="${yy}" stroke="#e0ddd8" stroke-width="1"/>`;
     markup += `<text x="${pad.left - 10}" y="${yy + 4}" text-anchor="end" fill="#999" font-size="11" font-family="Source Sans 3, sans-serif">${mi}</text>`;
@@ -958,16 +958,16 @@ years.forEach((y) => {
   const redEndX = x(years);
   const redEndY = y(currentRate * years);
   markup += `<circle cx="${redEndX}" cy="${redEndY}" r="5" fill="#B8432F" opacity="0.7"/>`;
-  markup += `<text x="${redEndX + 10}" y="${redEndY + 2}" fill="#B8432F" font-size="12" font-weight="700" font-family="Source Sans 3, sans-serif">~5 mi</text>`;
-  markup += `<text x="${redEndX + 10}" y="${redEndY + 15}" fill="#B8432F" font-size="9" font-family="Source Sans 3, sans-serif" opacity="0.7">of 154</text>`;
+  markup += `<text x="${redEndX + 10}" y="${redEndY + 2}" fill="#B8432F" font-size="12" font-weight="700" font-family="Source Sans 3, sans-serif">~10 mi</text>`;
+  markup += `<text x="${redEndX + 10}" y="${redEndY + 15}" fill="#B8432F" font-size="9" font-family="Source Sans 3, sans-serif" opacity="0.7">of 166</text>`;
 
   // Green line + endpoint label
   markup += `<polyline points="${greenPoints.join(' ')}" fill="none" stroke="#4A7C59" stroke-width="3"/>`;
   const greenEndX = x(years);
   const greenEndY = y(proposedRate * years);
   markup += `<circle cx="${greenEndX}" cy="${greenEndY}" r="5" fill="#4A7C59"/>`;
-  markup += `<text x="${greenEndX + 10}" y="${greenEndY + 2}" fill="#4A7C59" font-size="12" font-weight="700" font-family="Source Sans 3, sans-serif">~15 mi</text>`;
-  markup += `<text x="${greenEndX + 10}" y="${greenEndY + 15}" fill="#4A7C59" font-size="9" font-family="Source Sans 3, sans-serif" opacity="0.7">of 154</text>`;
+  markup += `<text x="${greenEndX + 10}" y="${greenEndY + 2}" fill="#4A7C59" font-size="12" font-weight="700" font-family="Source Sans 3, sans-serif">~30 mi</text>`;
+  markup += `<text x="${greenEndX + 10}" y="${greenEndY + 15}" fill="#4A7C59" font-size="9" font-family="Source Sans 3, sans-serif" opacity="0.7">of 166</text>`;
 
   // Axes
   markup += `<line x1="${pad.left}" y1="${pad.top}" x2="${pad.left}" y2="${H - pad.bottom}" stroke="#bbb" stroke-width="1.5"/>`;
