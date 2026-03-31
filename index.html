@@ -597,6 +597,7 @@ section p {
   color: var(--caution);
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .cta-principle p {
@@ -827,13 +828,17 @@ section p {
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Find My Polling Place
       </a>
-      <a href="#" id="calendarBtn" class="cta-btn btn-secondary">
+    </div>
+    <div class="cta-buttons" style="margin-top: 0.5rem;">
+      <a href="#" id="calendarBtnApple" class="cta-btn btn-secondary">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Add to My Calendar
+        Apple Calendar
+      </a>
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Vote%20%E2%80%93%20McAlester%20Infrastructure%20Sales%20Tax&dates=20260407T120000/20260407T190000&details=McAlester%20Special%20Election%0APolls%20open%207%20AM%20-%207%20PM%0AFind%20your%20polling%20place%3A%20https%3A%2F%2Fokvoterportal.okelections.gov%2F&location=McAlester%2C%20OK" target="_blank" rel="noopener" class="cta-btn btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Google Calendar
       </a>
     </div>
-
-    <p style="font-size: 0.95rem; opacity: 0.6; margin-top: 2.5rem;">Our infrastructure wasn't neglected in a day. It won't be rebuilt in a day. But with the right funding and the right priorities, we can start building a McAlester that's as strong underground as it looks on the surface.</p>
 
     <div class="source-note">
       Data sources: City of McAlester Mid-Year Budget FY2025-26 presentation; Ordinance No. 2863 (2026 Infrastructure Improvement Sales Tax); Division 8 Citizens Street Improvement Commission ordinance; McAlester City Council Special Meeting minutes, January 13 & 28, 2026; McAlester News-Capital reporting; FHWA highway cost data; ASCE/Utah State University water main study (2023). This page was created by a McAlester resident as a civic resource — not by the City of McAlester.
@@ -930,15 +935,16 @@ years.forEach((y) => {
   }
   markup += `<polygon points="${gapPoly}" fill="rgba(74, 124, 89, 0.1)"/>`;
 
-  // Gap annotation - centered in the gap area at year 5
-  const midYr = 5;
+  // Gap annotation - centered in the gap area at year 6
+  const midYr = 6;
   const gapTopY = y(proposedRate * midYr);
   const gapBotY = y(currentRate * midYr);
   const gapMidY = (gapTopY + gapBotY) / 2;
   const annotX = x(midYr);
-  markup += `<line x1="${annotX}" y1="${gapTopY + 8}" x2="${annotX}" y2="${gapBotY - 8}" stroke="#4A7C59" stroke-width="1.5" marker-start="url(#arrowUp)" marker-end="url(#arrowDown)"/>`;
-  markup += `<text x="${annotX + 10}" y="${gapMidY - 2}" fill="#4A7C59" font-size="12" font-weight="700" font-family="Source Sans 3, sans-serif">3× more</text>`;
-  markup += `<text x="${annotX + 10}" y="${gapMidY + 13}" fill="#4A7C59" font-size="11" font-family="Source Sans 3, sans-serif">progress</text>`;
+  // Vertical arrow line - endpoints sit on the data lines
+  markup += `<line x1="${annotX}" y1="${gapTopY}" x2="${annotX}" y2="${gapBotY}" stroke="#4A7C59" stroke-width="1.5" marker-start="url(#arrowUp)" marker-end="url(#arrowDown)"/>`;
+  markup += `<text x="${annotX + 12}" y="${gapMidY - 4}" fill="#4A7C59" font-size="12" font-weight="700" font-family="Source Sans 3, sans-serif">3× more</text>`;
+  markup += `<text x="${annotX + 12}" y="${gapMidY + 11}" fill="#4A7C59" font-size="11" font-family="Source Sans 3, sans-serif">progress</text>`;
 
   // Red line + endpoint label
   markup += `<polyline points="${redPoints.join(' ')}" fill="none" stroke="#B8432F" stroke-width="2.5" stroke-opacity="0.6"/>`;
@@ -981,7 +987,7 @@ document.querySelectorAll('section, .dime-section .inner, .dig-once-section .inn
 });
 
 // Calendar .ics download
-document.getElementById('calendarBtn').addEventListener('click', function(e) {
+document.getElementById('calendarBtnApple').addEventListener('click', function(e) {
   e.preventDefault();
   const ics = [
     'BEGIN:VCALENDAR',
