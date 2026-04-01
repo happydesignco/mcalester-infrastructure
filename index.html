@@ -837,11 +837,11 @@ section p {
       <div class="label">lane miles<br>to maintain</div>
     </div>
     <div class="scale-card">
-      <div class="big-num blue">$1.5M</div>
-      <div class="label">cost to reconstruct<br>one lane mile</div>
+      <div class="big-num blue">$3M</div>
+      <div class="label">cost to reconstruct<br>one mile of street</div>
     </div>
     <div class="scale-card">
-      <div class="big-num gold">$249M</div>
+      <div class="big-num gold">$498M</div>
       <div class="label">total reconstruction<br>cost (streets only)</div>
     </div>
     <div class="scale-card">
@@ -850,7 +850,7 @@ section p {
     </div>
   </div>
 
-  <p>At $1.5 million a year and $1.5 million per lane mile, we can reconstruct about <strong>one lane mile of street per year</strong>. At that pace, it would take over <strong>160 years</strong> to address all 166 lane miles.</p>
+  <p>At $1.5 million a year and $3 million per mile, we can reconstruct about <strong>half a mile of street per year</strong>. At that pace, it would take over <strong>330 years</strong> to address all 166 lane miles.</p>
 
   <p>The proposed 1% tax has a <strong>10-year sunset</strong>. It's not forever. So the real question is simple: how much do we get done in those 10 years?</p>
 
@@ -862,7 +862,7 @@ section p {
     </div>
   </div>
 
-  <p style="margin-top: 2rem;">An additional 1% sales tax would generate an estimated <strong>$3–5 million per year</strong> — roughly tripling the city's infrastructure capacity. Over 10 years, that's the difference between fixing <strong>10 lane miles</strong> and fixing <strong>30 lane miles</strong> at current surface reconstruction costs. But the real question isn't just <em>how many</em> miles we fix — it's <em>how well</em> we fix them.</p>
+  <p style="margin-top: 2rem;">An additional 1% sales tax would generate an estimated <strong>$3–5 million per year</strong> — roughly tripling the city's infrastructure capacity. Over 10 years, that's the difference between fixing <strong>5 miles</strong> and fixing <strong>15 miles</strong> at the city's planning-level reconstruction cost. But the real question isn't just <em>how many</em> miles we fix — it's <em>how well</em> we fix them.</p>
 </section>
 
 <!-- SECTION 4: DIG ONCE -->
@@ -899,14 +899,14 @@ section p {
     <div class="cost-compare">
       <div class="cost-option wrong">
         <div class="option-title">Surface Only</div>
-        <div class="option-price">$1.5M</div>
-        <div class="option-unit">per lane mile</div>
+        <div class="option-price">$3M</div>
+        <div class="option-unit">per mile</div>
         <div class="option-detail">Looks great for a year or two. Then a water main breaks. Tear it up, fix the pipe, repave. <strong>Pay twice.</strong></div>
       </div>
       <div class="cost-option right">
         <div class="option-title">Dig Once, Fix It All</div>
-        <div class="option-price">~$4M</div>
-        <div class="option-unit">per lane mile</div>
+        <div class="option-price">~$4.4M</div>
+        <div class="option-unit">per mile</div>
         <div class="option-detail">Assess and repair water, sewer, and drainage <em>before</em> resurfacing. One disruption. One bill. <strong>Done right.</strong></div>
       </div>
     </div>
@@ -1032,9 +1032,9 @@ debtData.forEach((y) => {
   const ch = H - pad.top - pad.bottom;
 
   const years = 10;
-  const currentRate = 1;     // lane miles/year at $1.5M
-  const proposedRate = 3;    // lane miles/year at ~$4.5M
-  const maxMiles = proposedRate * years; // 30
+  const currentRate = 0.5;   // miles/year at $1.5M budget ÷ $3M/mile
+  const proposedRate = 1.5;  // miles/year at ~$4.5M ÷ $3M/mile
+  const maxMiles = proposedRate * years; // 15
 
   function x(yr) { return pad.left + (yr / years) * cw; }
   function y(mi) { return pad.top + ch - (mi / maxMiles) * ch; }
@@ -1048,7 +1048,7 @@ debtData.forEach((y) => {
   </defs>`;
 
   // Y-axis gridlines
-  [0, 10, 20, 30].forEach(mi => {
+  [0, 5, 10, 15].forEach(mi => {
     const yy = y(mi);
     markup += `<line x1="${pad.left}" y1="${yy}" x2="${W - pad.right}" y2="${yy}" stroke="#e0ddd8" stroke-width="1"/>`;
     markup += `<text x="${pad.left - 10}" y="${yy + 4}" text-anchor="end" fill="#999" font-size="11" font-family="Source Sans 3, sans-serif">${mi}</text>`;
@@ -1100,7 +1100,7 @@ debtData.forEach((y) => {
   const redEndX = x(years);
   const redEndY = y(currentRate * years);
   markup += `<circle cx="${redEndX}" cy="${redEndY}" r="5" fill="#B8432F" opacity="0.7"/>`;
-  markup += `<text x="${redEndX + 10}" y="${redEndY + 2}" fill="#B8432F" font-size="12" font-weight="700" font-family="Source Sans 3, sans-serif">~10 mi</text>`;
+  markup += `<text x="${redEndX + 10}" y="${redEndY + 2}" fill="#B8432F" font-size="12" font-weight="700" font-family="Source Sans 3, sans-serif">~5 mi</text>`;
   markup += `<text x="${redEndX + 10}" y="${redEndY + 15}" fill="#B8432F" font-size="9" font-family="Source Sans 3, sans-serif" opacity="0.7">of 166</text>`;
 
   // Green line + endpoint label
@@ -1108,7 +1108,7 @@ debtData.forEach((y) => {
   const greenEndX = x(years);
   const greenEndY = y(proposedRate * years);
   markup += `<circle cx="${greenEndX}" cy="${greenEndY}" r="5" fill="#4A7C59"/>`;
-  markup += `<text x="${greenEndX + 10}" y="${greenEndY + 2}" fill="#4A7C59" font-size="12" font-weight="700" font-family="Source Sans 3, sans-serif">~30 mi</text>`;
+  markup += `<text x="${greenEndX + 10}" y="${greenEndY + 2}" fill="#4A7C59" font-size="12" font-weight="700" font-family="Source Sans 3, sans-serif">~15 mi</text>`;
   markup += `<text x="${greenEndX + 10}" y="${greenEndY + 15}" fill="#4A7C59" font-size="9" font-family="Source Sans 3, sans-serif" opacity="0.7">of 166</text>`;
 
   // Axes
