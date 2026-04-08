@@ -739,7 +739,8 @@ section p {
 
 .result-page:has(.original-content[open]) {
   min-height: auto;
-  padding-bottom: 0;
+  padding: 2rem 0 0 0;
+  align-items: stretch;
 }
 
 .original-content[open] ~ * {
@@ -811,14 +812,18 @@ section p {
   max-width: none;
 }
 
-.original-content[open] p,
+/* Reset all opacity overrides inside the accordion */
+.original-content[open] .hero p,
+.original-content[open] .hero .scroll-cue,
+.original-content[open] section p,
 .original-content[open] .subtitle,
 .original-content[open] .cta-principle p,
-.original-content[open] .page-footer p {
-  opacity: 1;
-}
-
-.original-content[open] .cta-section p {
+.original-content[open] .cta-section p,
+.original-content[open] .page-footer p,
+.original-content[open] .dime-legend-item,
+.original-content[open] .callout,
+.original-content[open] .option-detail,
+.original-content[open] .option-unit {
   opacity: 1;
 }
 
