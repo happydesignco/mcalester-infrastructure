@@ -759,7 +759,7 @@ section p {
   margin-bottom: 1rem;
 }
 
-.result-page p {
+.result-page > p {
   font-size: clamp(0.95rem, 2vw, 1.1rem);
   color: var(--text-light);
   max-width: 500px;
@@ -767,12 +767,12 @@ section p {
   line-height: 1.6;
 }
 
-.result-page a {
+.result-page > a {
   color: var(--water-blue);
   text-decoration: none;
 }
 
-.result-page a:hover {
+.result-page > a:hover {
   text-decoration: underline;
 }
 
@@ -810,21 +810,6 @@ section p {
 
 .original-content[open] {
   max-width: none;
-}
-
-/* Reset all opacity overrides inside the accordion */
-.original-content[open] .hero p,
-.original-content[open] .hero .scroll-cue,
-.original-content[open] section p,
-.original-content[open] .subtitle,
-.original-content[open] .cta-principle p,
-.original-content[open] .cta-section p,
-.original-content[open] .page-footer p,
-.original-content[open] .dime-legend-item,
-.original-content[open] .callout,
-.original-content[open] .option-detail,
-.original-content[open] .option-unit {
-  opacity: 1;
 }
 
 /* ===== RESPONSIVE ===== */
