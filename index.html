@@ -724,6 +724,85 @@ section p {
   text-decoration: underline;
 }
 
+/* ===== RESULT PAGE ===== */
+.result-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  background: var(--paper);
+  color: var(--text);
+}
+
+.shrug {
+  font-size: clamp(4rem, 15vw, 8rem);
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  opacity: 0.25;
+}
+
+.result-page h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 1rem;
+}
+
+.result-page p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-light);
+  max-width: 500px;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.result-page a {
+  color: var(--water-blue);
+  text-decoration: none;
+}
+
+.result-page a:hover {
+  text-decoration: underline;
+}
+
+.original-content {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 3rem;
+}
+
+.original-content summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  opacity: 0.5;
+  text-align: center;
+  padding: 0.75rem;
+  transition: opacity 0.2s;
+  list-style: none;
+}
+
+.original-content summary::-webkit-details-marker {
+  display: none;
+}
+
+.original-content summary::before {
+  content: '▸ ';
+}
+
+.original-content[open] summary::before {
+  content: '▾ ';
+}
+
+.original-content summary:hover {
+  opacity: 0.8;
+}
+
+.original-content[open] {
+  max-width: none;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
   .dime-bar { height: 44px; }
@@ -737,6 +816,17 @@ section p {
 </style>
 </head>
 <body>
+
+<!-- RESULT PAGE -->
+<div class="result-page">
+  <div class="shrug">¯\_(ツ)_/¯</div>
+  <h1>The measure didn't pass.</h1>
+  <p>On April 7, 2026, McAlester voters rejected the proposed 1% infrastructure sales tax.</p>
+  <p>The roads are still here. The water lines are still aging. The math hasn't changed. We'll keep watching.</p>
+  <p style="margin-top: 1rem;"><a href="mailto:contact@mcalesterstreets.com">contact@mcalesterstreets.com</a></p>
+
+  <details class="original-content">
+    <summary>View the original analysis</summary>
 
 <!-- HERO -->
 <div class="hero">
@@ -986,6 +1076,9 @@ section p {
       <p><a href="mailto:contact@mcalesterstreets.com">contact@mcalesterstreets.com</a></p>
     </div>
   </div>
+</div>
+
+  </details>
 </div>
 
 <script>
